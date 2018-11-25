@@ -10,10 +10,17 @@ namespace WCFClient
 {
     class Program
     {
-        static void Main(string[] args)
+        static   void Main(string[] args)
         {
-            
-            
+
+            wcfTest();
+            Console.ReadLine();
+
+        }
+
+        static async void wcfTest()
+        {
+
             var uri = "net.tcp://192.168.0.103:9015/ProductService";
             var binding = new NetTcpBinding(SecurityMode.None, false)
             {
@@ -30,19 +37,18 @@ namespace WCFClient
             {
                 var endPoint = new EndpointAddress(uri);
                 using (var channel = new ChannelFactory<IProductService>(binding, endPoint))
-                    {
-                        
-                        var proxy = channel.CreateChannel();
-                        for (int a = 0; a < 3; a++)
-                        {
-                        proxy?.GetTaskStrings().Result.ToList().ForEach(p => Console.WriteLine(i + " - " + p + "- - " + a));
-                    }
-                        channel.Close();
-                        proxy = null;
-                    }
-            }
+                {
 
-            Console.ReadLine();
+                    var proxy = channel.CreateChannel();
+                    for (int a = 0; a < 3; a++)
+                    {
+                        var result = await proxy?.GetTaskStrings();
+                        result.ToList().ForEach(p => Console.WriteLine(i + " - " + p + "- - " + a));
+                    }
+                    channel.Close();
+                    proxy = null;
+                }
+            }
 
         }
     }
