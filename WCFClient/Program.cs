@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using ProtoBuf;
 using WCFContracts;
 
 namespace WCFClient
@@ -33,8 +35,7 @@ namespace WCFClient
                 MaxConnections = 1000
             };
 
-            for (int i = 0; i < 20000; i++)
-            {
+            
                 var endPoint = new EndpointAddress(uri);
                 using (var channel = new ChannelFactory<IProductService>(binding, endPoint))
                 {
@@ -43,12 +44,21 @@ namespace WCFClient
                     for (int a = 0; a < 3; a++)
                     {
                         var result = await proxy?.GetTaskStrings();
-                        result.ToList().ForEach(p => Console.WriteLine(i + " - " + p + "- - " + a));
+                        result.ToList().ForEach(p => Console.WriteLine(a + " - " + p + "- - " + a));
                     }
+                    for (int a = 0; a < 3; a++)
+                    {
+                        var result = await proxy?.GetTaskStream();
+                        using (var stream = new MemoryStream(result))
+                        {
+                            var _fw = Serializer.Deserialize<PortoDTO>(stream);
+                            Console.WriteLine(_fw.StrName);
+                        }
+                    }
+
                     channel.Close();
                     proxy = null;
                 }
-            }
 
         }
     }

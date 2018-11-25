@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -16,5 +17,8 @@ namespace WCFContracts
 
         [OperationContract]
         Task<string[]> GetTaskStrings();
+
+        [OperationContract]
+        Task<byte[]> GetTaskStream();
     }
 }
