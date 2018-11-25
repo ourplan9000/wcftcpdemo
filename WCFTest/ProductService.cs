@@ -35,6 +35,12 @@ namespace WCFTest
                 PortoDTO fw = new PortoDTO();
                 fw.Number = 123456;
                 fw.StrName = "WCFTest";
+                fw.lstInfo= new List<string>()
+                {
+                    "1",
+                   "2",
+                    "3"
+                };
                 byte[] data;
                 using (var stream = new MemoryStream())
                 {

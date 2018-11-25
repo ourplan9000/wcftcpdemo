@@ -44,7 +44,7 @@ namespace WCFClient
                     for (int a = 0; a < 3; a++)
                     {
                         var result = await proxy?.GetTaskStrings();
-                        result.ToList().ForEach(p => Console.WriteLine(a + " - " + p + "- - " + a));
+                        result.ToList().ForEach(p => Console.WriteLine(a + " - " + p ));
                     }
                     for (int a = 0; a < 3; a++)
                     {
@@ -53,7 +53,8 @@ namespace WCFClient
                         {
                             var _fw = Serializer.Deserialize<PortoDTO>(stream);
                             Console.WriteLine(_fw.StrName);
-                        }
+                           _fw.lstInfo.ForEach(p => Console.WriteLine(p + "- - "));
+                    }
                     }
 
                     channel.Close();
