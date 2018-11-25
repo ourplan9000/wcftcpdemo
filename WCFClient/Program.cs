@@ -35,8 +35,8 @@ namespace WCFClient
                         var proxy = channel.CreateChannel();
                         for (int a = 0; a < 3; a++)
                         {
-                            proxy?.GetStrings().ToList().ForEach(p => Console.WriteLine(i + " - " + p + "- - " + a));
-                        }
+                        proxy?.GetTaskStrings().Result.ToList().ForEach(p => Console.WriteLine(i + " - " + p + "- - " + a));
+                    }
                         channel.Close();
                         proxy = null;
                     }

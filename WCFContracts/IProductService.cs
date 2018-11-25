@@ -12,5 +12,9 @@ namespace WCFContracts
     {
         [OperationContract]
         string[] GetStrings();
+
+
+        [OperationContract]
+        Task<string[]> GetTaskStrings();
     }
 }
