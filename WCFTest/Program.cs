@@ -26,7 +26,7 @@ namespace WCFTest
                 ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max,
                 ReceiveTimeout = new TimeSpan(0, 10, 0),
                 SendTimeout = new TimeSpan(0, 10, 0),
-                MaxConnections = 100
+                MaxConnections = 1000
             };
             host.AddServiceEndpoint(typeof(IProductService), binding, "");
             host.Opened += HostOpened;
