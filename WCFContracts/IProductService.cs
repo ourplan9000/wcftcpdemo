@@ -21,4 +21,6 @@ namespace WCFContracts
         [OperationContract]
         Task<byte[]> GetTaskStream();
     }
+
+
 }
