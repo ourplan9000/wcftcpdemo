@@ -12,9 +12,10 @@ namespace WCFClient
     {
         private string uri = string.Empty;
 
-        public ProductService(string _uri)
+        public ProductService(string _ServerIp, string _ServerPort)
+            :base(_ServerIp,_ServerPort)
         {
-            uri = _uri;
+            
         }
         public async Task<List<string>> GetTaskStream()
         {

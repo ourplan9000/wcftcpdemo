@@ -22,8 +22,8 @@ namespace WCFClient
 
         static async void Testwcf()
         {
-            var uri = "net.tcp://192.168.0.103:9015/ProductService";
-            ProductService productService = new ProductService(uri);
+             
+            ProductService productService = new ProductService("192.168.0.103","9015");
             var list = await productService.GetTaskString();
             list.ForEach(p => Console.WriteLine(p));
             for (int i = 0; i < 10000; i++)

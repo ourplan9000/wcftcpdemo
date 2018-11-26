@@ -49,6 +49,7 @@
     <Compile Include="IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProtobufSerializer.cs" />
+    <Compile Include="ProxyT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
