@@ -22,14 +22,16 @@ namespace WCFClient
             try
             {
                 var listStr = new List<string>();
-                var result = await  proxy?.GetTaskStream();
-               
-                using (var stream = new MemoryStream(result))
+                var taskStream = proxy?.GetTaskStream();
+                if (taskStream != null)
                 {
-                  
-                    var _fw = Serializer.Deserialize<PortoDTO>(stream);
-                    Console.WriteLine(_fw.StrName);
-                    listStr.AddRange(_fw.lstInfo);
+                    var result = await  taskStream; 
+                    using (var stream = new MemoryStream(result))
+                    { 
+                        var _fw = Serializer.Deserialize<PortoDTO>(stream);
+                        Console.WriteLine(_fw.StrName);
+                        listStr.AddRange(_fw.lstInfo);
+                    }
                 }
                 base.ProxyClose(proxy);
                 return listStr;
