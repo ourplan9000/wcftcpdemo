@@ -12,8 +12,8 @@ namespace WCFContracts
 {
     public class ProxyT<TContract>
     {
-        string ServerIp=String.Empty;
-        string ServerPort = String.Empty;
+        readonly string ServerIp=String.Empty;
+        readonly string ServerPort = String.Empty;
 
         public ProxyT(string _ServerIp, string _ServerPort)
         {
@@ -60,9 +60,9 @@ namespace WCFContracts
                 SendTimeout = new TimeSpan(0, 10, 0)
             };
         }
-        public static ServiceEndpoint GetServiceEndpoint(string ServerIp,string ServerPort)
+        public static ServiceEndpoint GetServiceEndpoint(string serverIp,string serverPort)
         {
-            if (string.IsNullOrEmpty(ServerIp) || string.IsNullOrEmpty(ServerPort))
+            if (string.IsNullOrEmpty(serverIp) || string.IsNullOrEmpty(serverPort))
                 return null;
 
             var netBind = new NetTcpBinding(SecurityMode.None)
@@ -80,7 +80,7 @@ namespace WCFContracts
 
             return new ServiceEndpoint(ContractDescription.GetContract(typeof(TContract)),
                 netBind,
-                new EndpointAddress(String.Format("net.tcp://{0}:{1}/services/{2}", ServerIp, ServerPort,
+                new EndpointAddress(String.Format("net.tcp://{0}:{1}/services/{2}", serverIp, serverPort,
                     typeof(TContract).Name.Substring(1).ToLower())));
         }
     }
